@@ -15,23 +15,14 @@ This project will be using Flask to deploy a small web app of your choice. The g
 ```
 pip install -r requirements.txt
 ```
+```
+flask --app flaskr init-db
+```
 
-### Installing
-
-* How/where to download your program
-* Any modifications needed to be made to files/folders
-
-### Executing program
+## Executing program
 
 ```
 flask --app flaskr run
-```
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
 ```
 
 ## Authors

@@ -14,6 +14,8 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        firstname = request.form['firstname']
+        lastname = request.form['lastname']
         db = get_db()
         error = None
 
@@ -21,12 +23,16 @@ def register():
             error = 'Username is required.'
         elif not password:
             error = 'Password is required.'
+        elif not firstname:
+            error = 'First name is required.'
+        elif not lastname:
+            error = 'Last name is required.'
 
         if error is None:
             try:
                 db.execute(
-                    "INSERT INTO user (username, password) VALUES (?, ?)",
-                    (username, generate_password_hash(password)),
+                    "INSERT INTO user (username, password, firstname, lastname) VALUES (?, ?, ?, ?)",
+                    (username, generate_password_hash(password), firstname, lastname)
                 )
                 db.commit()
             except db.IntegrityError:
