@@ -7,10 +7,23 @@
 {% block content %}
   <form method="post">
     <label for="title">Title</label>
-    <input name="title" id="title"
-      value="{{ request.form['title'] or post['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
+    <input name="title" id="title" value="{{ request.form['title'] or post['title'] }}" required>
+
+    <label for="driver">Driver</label>
+    <input name="driver" id="driver" value="{{ post['driver'] }}" required>
+
+    <label for="sponsor">Sponsor</label>
+    <input name="sponsor" id="sponsor" value="{{ post['sponsor'] }}" required>
+
+    <label for="number">Number</label>
+    <input type="number" name="number" id="number" value="{{ post['number'] }}" required>
+
+    <label for="year">Year</label>
+    <input type="number" name="year" id="year" value="{{ post['year'] }}" required>
+
+    <label for="picture">Picture (Optional)</label>
+    <input type="file" name="picture" id="picture">
+
     <input type="submit" value="Save">
   </form>
   <hr>

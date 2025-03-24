@@ -10,10 +10,14 @@ CREATE TABLE user (
 );
 
 CREATE TABLE post (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  title TEXT NOT NULL,
-  body TEXT NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES user (id)
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    author_id INTEGER,
+    driver TEXT NOT NULL,
+    sponsor TEXT NOT NULL,
+    number INTEGER NOT NULL,
+    year INTEGER NOT NULL,
+    picture TEXT,  -- Optional field for the picture URL
+    FOREIGN KEY (author_id) REFERENCES user(id)
 );

@@ -37,8 +37,17 @@ def register():
                 db.commit()
             except db.IntegrityError:
                 error = f"User {username} is already registered."
-            else:
-                return redirect(url_for("auth.login"))
+            if error is None:
+                user = db.execute(
+                    "SELECT * FROM user WHERE username = ?", (username,)
+                ).fetchone()
+
+                session.clear()
+                session['user_id'] = user['id']
+
+                flash('Successfully registered and logged in!')
+
+                return redirect(url_for('index'))
 
         flash(error)
 
@@ -67,7 +76,7 @@ def login():
 
         flash(error)
 
-    return render_template('auth/login.html')
+    return redirect(url_for('auth.register'))
 
 @bp.before_app_request
 def load_logged_in_user():
