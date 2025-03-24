@@ -18,6 +18,5 @@ CREATE TABLE post (
     sponsor TEXT NOT NULL,
     number INTEGER NOT NULL,
     year INTEGER NOT NULL,
-    picture TEXT,  -- Optional field for the picture URL
     FOREIGN KEY (author_id) REFERENCES user(id)
 );

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     <label for="title">Title</label>
     <input name="title" id="title" value="{{ request.form['title'] }}" required>
 
@@ -20,9 +20,6 @@
 
     <label for="year">Year</label>
     <input type="number" name="year" id="year" value="{{ request.form['year'] }}" required>
-
-    <label for="picture">Picture (Optional)</label>
-    <input type="file" name="picture" id="picture">
 
     <input type="submit" value="Save">
   </form>

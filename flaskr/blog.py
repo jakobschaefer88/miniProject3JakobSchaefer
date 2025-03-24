@@ -27,7 +27,6 @@ def create():
         sponsor = request.form['sponsor']
         number = request.form['number']
         year = request.form['year']
-        picture = request.form['picture']
         error = None
 
         if not title:
@@ -46,9 +45,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, driver, sponsor, number, year, picture, author_id)'
-                ' VALUES (?, ?, ?, ?, ?, ?, ?)',
-                (title, driver, sponsor, number, year, picture, g.user['id'])
+                'INSERT INTO post (title, driver, sponsor, number, year, author_id)'
+                ' VALUES (?, ?, ?, ?, ?, ?)',
+                (title, driver, sponsor, number, year, g.user['id'])
             )
             db.commit()
             return redirect(url_for('blog.index'))
@@ -57,7 +56,7 @@ def create():
 
 def get_post(id, check_author=True):
     post = get_db().execute(
-        'SELECT p.id, title, created, author_id, username'
+        'SELECT p.id, title, driver, sponsor, number, year, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' WHERE p.id = ?',
         (id,)
@@ -82,7 +81,6 @@ def update(id):
         sponsor = request.form['sponsor']
         number = request.form['number']
         year = request.form['year']
-        picture = request.form['picture']
         error = None
 
         if not title:
@@ -101,9 +99,9 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                'UPDATE post SET title = ?, driver = ?, sponsor = ?, number = ?, year = ?, picture = ?'
+                'UPDATE post SET title = ?, driver = ?, sponsor = ?, number = ?, year = ?'
                 ' WHERE id = ?',
-                (title, driver, sponsor, number, year, picture, id)
+                (title, driver, sponsor, number, year, id)
             )
             db.commit()
             return redirect(url_for('blog.index'))
